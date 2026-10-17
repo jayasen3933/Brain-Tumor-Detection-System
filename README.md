@@ -1,137 +1,132 @@
-#  Brain Tumor Classification Using Deep Learning
 
-##  Overview
-This project focuses on the classification of brain tumors from MRI scans using advanced deep learning techniques. The goal is to assist healthcare professionals in the early detection and diagnosis of brain tumors. The project uses transfer learning with the pre-trained **Xception model** and a custom-built **Convolutional Neural Network (CNN)** to classify MRI images into four categories:
 
-- Glioma
-- Meningioma
-- Pituitary
-- No Tumor
+# Brain Tumor Detection System
 
-An interactive **Streamlit** web app has been developed to allow users to upload MRI scans and receive predictions along with visual explanations.
+An AI-powered web application that classifies brain MRI images into four categories using a deep learning model and provides predictions through an interactive Streamlit interface.
 
-##  Screenshots
-1. **Streamlit Web App**: 
- ![Streamlit Web App](images/1.png)
- ---
- ![Streamlit Web App](images/2.png)
- ---
- ![Streamlit Web App](images/3.png)
- ---
+## Overview
 
-##  Features
+The Brain Tumor Detection System uses a trained Xception-based image classification model to analyze uploaded brain MRI images and predict one of four classes. The application provides a simple interface for uploading an image and viewing the predicted class with its associated confidence score.
 
-###  Deep Learning Models
-- **Xception Model**: 
-  - Pre-trained on the ImageNet dataset and fine-tuned for brain tumor classification.
-  - Uses deep convolutional layers for feature extraction and classification.
-  - Achieves high generalization and accuracy.
+**This project is intended for educational and research purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment.**
 
-- **Custom CNN Model**:
-  - Built from scratch using **Keras**.
-  - Includes convolutional layers, max pooling, and dense layers.
-  - Optimized for MRI image classification, providing robust performance on unseen data.
-  - Achieved **98% accuracy** on test data.
+## Features
 
-###  Interactive Web App
-- Developed using **Streamlit** to enable real-time MRI scan analysis.
-- Users can upload MRI images and get predictions from both models.
-- Provides detailed insights and saliency map visualizations for predictions.
+- Upload brain MRI images in JPG, JPEG, and PNG formats.
+- Classify images into four categories.
+- Display the predicted category and class probabilities.
+- Interactive web interface built with Streamlit.
+- Transfer learning using the Xception architecture.
+- Saved model for inference without retraining.
 
-###  Saliency Map Generation
-- Integrated **Gemini 1.5 Flash** for generating visual explanations of predictions.
-- Highlights key regions of MRI scans that influenced the model’s decision.
+## Classification Categories
 
-###  Challenges Solved:
-- Achieved **99% accuracy** using Xception transfer learning and **98% accuracy** with the custom CNN model.
-- Added multimodal interaction capabilities for deeper insights into the models' decisions.
-- Interactive web app allows real-time predictions and visual explanations of the results.
+1. Glioma
+2. Meningioma
+3. No Tumor
+4. Pituitary Tumor
 
-## 📂 Directory Structure
+## Technologies Used
 
-```plaintext
-├── Testing/                # Testing MRI images dataset  
-│   ├── glioma/
-│   ├── meningioma/
-│   ├── notumor/
-│   └── pituitary/
-├── images/                 # Images for README and documentation
-├── drive/                  # Contains pre-trained weights and related assets  
-├── saliency_maps/          # Generated visual explanations for MRI scans  
-├── sample_data/            # Sample input data for testing the app  
-├── app.py                  # Streamlit web app script  
-├── cnn_model.h5            # Saved weights for the custom CNN model  
-├── xception_model.weights.h5  # Saved weights for the fine-tuned Xception model  
-├── [`braintumorclassification.py`](braintumorclassification.py ) # Main script for training and prediction
-└── [`README.md`](README.md )               # Project documentation
+- **Programming Language:** Python
+- **Deep Learning:** TensorFlow, Keras
+- **Model Architecture:** Xception with transfer learning
+- **Web Framework:** Streamlit
+- **Image Processing:** Pillow, NumPy
+- **Version Control:** Git and GitHub
+
+## Project Structure
+
+```text
+Brain-Tumor-Detection-System/
+├── Training/                  # Training dataset (local only)
+├── Testing/                   # Testing dataset (local only)
+├── app.py                     # Streamlit web application
+├── train_model.py             # Model training script
+├── braintumorclassification.py # Original classification script
+├── brain_tumor_model.keras    # Trained model
+├── requirements.txt           # Python dependencies
+├── .gitignore                 # Ignored files and folders
+└── README.md                  # Project documentation
 ```
 
-##  Models
+The `Training/` and `Testing/` folders are excluded from GitHub through `.gitignore` to avoid uploading the large image datasets.
 
-### 1. Xception Model
-- Pre-trained on the ImageNet dataset and fine-tuned for brain tumor classification.
-- Utilizes deep convolutional layers to handle feature extraction.
-- Provides excellent generalization and achieves high accuracy.
+## Installation and Setup
 
-### 2. Custom CNN Model
-- Built from scratch using **Keras**.
-- Includes multiple convolutional layers, max pooling, and dense layers.
-- Optimized for MRI image classification, achieving robust performance on unseen data.
-
-##  How to Run the Project
-
-### 1. Install Dependencies
-Ensure you have **Python 3.9+** installed. Then, install the required packages:
+### 1. Clone the repository
 
 ```bash
+git clone https://github.com/jayasen3933/Brain-Tumor-Detection-System.git
+cd Brain-Tumor-Detection-System
+```
+
+### 2. Create a virtual environment
+
+```bash
+python -m venv .venv
+```
+
+Activate it on Windows:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+### 3. Install dependencies
+
+```bash
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 2. Run the Streamlit Web App
-Launch the app using the following command:
+### 4. Run the application
 
 ```bash
 streamlit run app.py
 ```
 
-- Upload an MRI image to get predictions from both the Xception and CNN models.
+Streamlit will display a local URL, usually `http://localhost:8501`. Open it in your browser to use the application.
 
-### 3. Train Models (Optional)
-If you'd like to train the models from scratch:
-1. Modify the training scripts in the **app.py** file.
-2. Ensure that the **Training/** and **Testing/** datasets are available.
-3. Use **TensorFlow/Keras** to fine-tune or build the models.
+## Model Training
 
-##  Challenges Implemented
-- **High Accuracy**: Achieved **98%** accuracy with the custom CNN and **99%** accuracy with Xception transfer learning.
-- **Interactive Web App**: Enables real-time predictions and saliency map visualizations.
-- **Multimodal Explanations**: Integrated **Gemini 1.5 Flash** for advanced visual and textual insights into model decisions.
-- **Comparative Analysis**: Dashboard for comparing model predictions.
-- **Detailed Reports**: Generates comprehensive prediction reports for doctors and patients.
+The `train_model.py` script trains the image classification model using the local training dataset and saves the trained model as `brain_tumor_model.keras`.
 
-##  Future Enhancements
-- **Multimodal LLM Integration**: Allow interactive chats with MRI scans to explain predictions in more detail.
-- **Historical Analysis**: Add a feature to compare predictions with historical MRI data.
-- **Mobile Integration**: Create a mobile-friendly app for easier accessibility.
+To train the model again, ensure the dataset folders are available locally and run:
 
-##  Tools & Technologies
-- **Programming Language**: Python
-- **Deep Learning Framework**: TensorFlow, Keras
-- **Web App Framework**: Streamlit
-- **Visualization**: Gemini 1.5 Flash for saliency maps
-- **Pre-trained Models**: Xception
+```bash
+python train_model.py
+```
 
-##  Dataset
-The dataset used for this project contains labeled MRI scans categorized into:
+Training requires additional time and memory. You can use the existing saved model to run the application without retraining.
 
-- Glioma
-- Meningioma
-- Pituitary
-- No Tumor
+## Model Evaluation
 
-Ensure you have appropriate rights to use the dataset for academic and non-commercial purposes.
+The current training run reported the following results:
 
-##  Results
-- **Xception Model**: 99% accuracy on test data.
-- **Custom CNN Model**: 98% accuracy on test data.
-- **Real-time Predictions**: Achieved within seconds using the Streamlit app.
+- **Training accuracy:** 89.66%
+- **Validation accuracy:** 89.52%
+- **Test accuracy:** 88.25%
+
+These are results from the current experiment, not a guarantee of real-world performance. Independent validation, class-wise evaluation, and checks for data leakage are necessary before drawing stronger conclusions.
+
+## Future Improvements
+
+- Add class-wise precision, recall, F1-score, and a confusion matrix.
+- Improve model evaluation and robustness across different MRI sources.
+- Enhance the user interface and deployment experience.
+- Explore model interpretability techniques such as Grad-CAM.
+
+## Disclaimer
+
+This application is a student project for learning and demonstration. Predictions may be incorrect and must not be used to make medical decisions. Consult a qualified healthcare professional for medical evaluation.
+
+## Author
+
+**Chada Jayasen Reddy**
+
+- GitHub: [jayasen3933](https://github.com/jayasen3933)
+
+## License
+
+No license has been specified for this repository yet. All rights are reserved unless a license is added.
